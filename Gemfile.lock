@@ -1,10 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    nagios-probe (0.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  nagios-probe

@@ -10,12 +10,20 @@
 ####################################################
 
 #
+$: << File.expand_path("..", __FILE__)
+
+#
 require 'rubygems'
 require "bundler/setup"
-require 'nagios-probe'
+require 'lib/nagios-probe.rb'
 
 #
 class OpenNebulaEconeProbe < Nagios::Probe
+
+  #
+  def exec
+    puts "Getting a response from the ECONE server"
+  end
 
   #
   def check_crit
@@ -25,11 +33,6 @@ class OpenNebulaEconeProbe < Nagios::Probe
   #
   def check_warn
     false
-  end
-
-  #
-  def check_ok
-    true
   end
 
   #

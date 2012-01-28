@@ -1,8 +1,8 @@
-Nagios probes for OpenNebula-related services e.g. econe-server, occi-server,
-oned RPC2.
+Nagios probes for OpenNebula-related services e.g. econe-server, occi-server
+and oned RPC2.
 
-These probes are written in Ruby and require the nagios-probe gem which can
-be installed through bundler.
+These probes are written in Ruby and use a modified version of the nagios-probe
+gem (sources available at https://github.com/hobodave/nagios-probe).
 
 DON'T EXPECT ANYTHING USEFUL YET, THIS IS JUST AN INITIAL COMMIT WITH PROBE
 TEMPLATES, DIRECTORY STRUCTURE ETC.
