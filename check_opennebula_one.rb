@@ -16,7 +16,7 @@ $: << File.expand_path("..", __FILE__)
 require 'rubygems'
 require 'bundler/setup'
 require 'lib/OptparseNagiosProbe'
-require 'lib/OpenNebulaEconeProbe'
+require 'lib/OpenNebulaOneProbe'
 require 'nagios-probe'
 
 #
@@ -24,7 +24,7 @@ begin
 
   options = OptparseNagiosProbe.parse(ARGV)
 
-  probe = OpenNebulaEconeProbe.new(options)
+  probe = OpenNebulaOneProbe.new(options)
   probe.run
 
 rescue Exception => e
