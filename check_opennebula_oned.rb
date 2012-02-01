@@ -15,15 +15,10 @@ $: << File.expand_path("..", __FILE__)
 #
 require 'rubygems'
 require "bundler/setup"
-require 'lib/nagios-probe.rb'
+require 'nagios-probe'
 
 #
 class OpenNebulaOnedProbe < Nagios::Probe
-
-  #
-  def exec
-    puts "Getting a response from the ONED server"
-  end
 
   #
   def check_crit
@@ -53,7 +48,7 @@ end
 
 #
 begin
-  options = {} # constructor accepts a single optional param that is assigned to @opts
+  options = {}
   probe = OpenNebulaOnedProbe.new(options)
   probe.run
 rescue Exception => e

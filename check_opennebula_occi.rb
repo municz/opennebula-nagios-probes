@@ -15,18 +15,25 @@ $: << File.expand_path("..", __FILE__)
 #
 require 'rubygems'
 require "bundler/setup"
-require 'lib/nagios-probe.rb'
+require 'nagios-probe'
+require "occi"
 
 #
 class OpenNebulaOcciProbe < Nagios::Probe
 
   #
-  def exec
-    puts "Getting a response from the OCCI server"
-  end
-
-  #
   def check_crit
+
+    connection = Occi::Client.new(
+        :host     => @opts[:occi_host],
+        :port     => @opts[:occi_port],
+        :scheme   => "https",
+        :user     => @opts[:occi_user],
+        :password => @opts[:occi_password]
+    )
+
+    puts connection.network.all
+
     false
   end
 
@@ -53,11 +60,11 @@ end
 
 #
 begin
-  options = {} # constructor accepts a single optional param that is assigned to @opts
+  options = {:occi_host => "", :occi_port => 9443, :occi_user => "", :occi_password => ""}
   probe = OpenNebulaOcciProbe.new(options)
   probe.run
 rescue Exception => e
-  puts "Unknown: " + e
+  puts "Unknown error: " + e.class.to_s + " saying '" + e.message + "'"
   exit Nagios::UNKNOWN
 end
 
