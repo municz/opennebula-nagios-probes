@@ -14,7 +14,7 @@ class OpenNebulaOcciProbe < Nagios::Probe
           :port     => @opts.one_port,
           :scheme   => @opts.one_proto,
           :user     => @opts.one_user,
-          :password => @opts.one_password
+          :password => @opts.one_pass
       )
 
       connection.network.all
