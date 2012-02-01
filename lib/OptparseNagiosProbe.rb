@@ -9,37 +9,43 @@ class OptparseNagiosProbe
 
     options = OpenStruct.new
 
+    options.debug = false
+    options.one_host = "localhost"
+    options.one_port = 4567
+    options.one_proto = :http
+    options.timeout = 60
+
     opts = OptionParser.new do |opts|
-      opts.banner = "Usage: check_opennebula_occi.rb [options]"
+      opts.banner = "Usage: check_opennebula_[one|occi|econe].rb [options]"
 
       opts.separator ""
       opts.separator "Specific options:"
 
-      opts.on("--[no-]verbose", "Run verbosely") do |v|
-        options.verbose = v
+      opts.on("--[no-]debug", "Run with debugging options") do |debug|
+        options.debug = debug
       end
 
-      opts.on("--host", String, "Host to be queried") do |host|
+      opts.on("--host [HOSTNAME]", String, "Host to be queried") do |host|
         options.one_host = host
       end
 
-      opts.on("--port", Integer, "Port to be queried") do |port|
+      opts.on("--port [PORT_NUMBER]", Integer, "Port to be queried") do |port|
         options.one_port = port
       end
 
-      opts.on("--user", String, "Username for authentication purposes") do |user|
+      opts.on("--user [USERNAME]", String, "Username for authentication purposes") do |user|
         options.one_user = user
       end
 
-      opts.on("--password", String, "Password for authentication purposes") do |pass|
+      opts.on("--password [PASSWORD]", String, "Password for authentication purposes") do |pass|
         options.one_pass = pass
       end
 
-      opts.on("--protocol", [:http, :https], "Protocol to use (http OR https)") do |proto|
+      opts.on("--protocol [http|https]", [:http, :https], "Protocol to use") do |proto|
         options.one_proto = proto
       end
 
-      opts.on("--timeout", Integer, "Timeout time in seconds") do |timeout|
+      opts.on("--timeout [SECONDS]", Integer, "Timeout time in seconds") do |timeout|
         options.timeout = timeout
       end
 
@@ -60,7 +66,7 @@ class OptparseNagiosProbe
 
     opts.parse!(args)
 
-    mandatory = [:host, :user, :password]
+    mandatory = [:one_user, :one_pass]
     options_hash = options.marshal_dump
 
     missing = mandatory.select{ |param| options_hash[param].nil? }
