@@ -12,7 +12,7 @@ class OpenNebulaOcciProbe < Nagios::Probe
       connection = Occi::Client.new(
           :host     => @opts.one_host,
           :port     => @opts.one_port,
-          :scheme   => @opts.one_proto,
+          :scheme   => @opts.proto,
           :user     => @opts.one_user,
           :password => @opts.one_pass
       )
@@ -36,7 +36,7 @@ class OpenNebulaOcciProbe < Nagios::Probe
       connection = Occi::Client.new(
           :host     => @opts.one_host,
           :port     => @opts.one_port,
-          :scheme   => @opts.one_proto,
+          :scheme   => @opts.proto,
           :user     => @opts.one_user,
           :password => @opts.one_pass
       )

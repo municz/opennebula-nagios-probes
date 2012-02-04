@@ -1,7 +1,7 @@
 require 'nagios-probe'
 
 #
-class OpenNebulaOneProbe < Nagios::Probe
+class OpenNebulaOnedProbe < Nagios::Probe
 
   #
   def check_crit

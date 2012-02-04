@@ -12,17 +12,17 @@ class OptparseNagiosProbe
     options.debug = false
     options.one_host = "localhost"
     options.one_port = 4567
-    options.one_proto = :http
+    options.proto = :http
     options.timeout = 60
 
     opts = OptionParser.new do |opts|
       opts.banner = "Usage: check_opennebula_[one|occi|econe].rb [options]"
 
       opts.separator ""
-      opts.separator "Specific options:"
+      opts.separator "Connection options:"
 
-      opts.on("--[no-]debug", "Run with debugging options") do |debug|
-        options.debug = debug
+      opts.on("--service [SERVICE_NAME]", [:oned, :occi, :econe], "Name of the cloud service to check") do |service|
+        options.service = service
       end
 
       opts.on("--host [HOSTNAME]", String, "Host to be queried") do |host|
@@ -41,28 +41,38 @@ class OptparseNagiosProbe
         options.one_pass = pass
       end
 
+      opts.separator ""
+      opts.separator "Session options:"
+
       opts.on("--protocol [http|https]", [:http, :https], "Protocol to use") do |proto|
-        options.one_proto = proto
+        options.proto = proto
       end
 
       opts.on("--timeout [SECONDS]", Integer, "Timeout time in seconds") do |timeout|
         options.timeout = timeout
       end
 
-      opts.on("--check-network [LIST_OF_IDS]", Array, "List of network IDs to check") do |network|
+      opts.separator ""
+      opts.separator "Service options:"
+
+      opts.on("--check-networks [LIST_OF_IDS]", Array, "List of network IDs to check") do |network|
         options.network = network
       end
 
-      opts.on("--check-storage [LIST_OF_IDS]", Array, "List of storage IDs to check") do |storage|
+      opts.on("--check-storages [LIST_OF_IDS]", Array, "List of storage IDs to check") do |storage|
         options.storage = storage
       end
 
-      opts.on("--check-compute [LIST_OF_IDS]", Array, "List of VM IDs to check") do |compute|
+      opts.on("--check-computes [LIST_OF_IDS]", Array, "List of VM IDs to check") do |compute|
         options.compute = compute
       end
 
       opts.separator ""
       opts.separator "Common options:"
+
+      opts.on("--[no-]debug", "Run with debugging options") do |debug|
+        options.debug = debug
+      end
 
       opts.on_tail("-h", "--help", "Show this message") do
         puts opts
@@ -78,7 +88,7 @@ class OptparseNagiosProbe
 
     opts.parse!(args)
 
-    mandatory = [:one_user, :one_pass]
+    mandatory = [:one_user, :one_pass, :service]
     options_hash = options.marshal_dump
 
     missing = mandatory.select{ |param| options_hash[param].nil? }
