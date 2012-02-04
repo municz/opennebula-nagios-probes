@@ -49,6 +49,18 @@ class OptparseNagiosProbe
         options.timeout = timeout
       end
 
+      opts.on("--check-network [LIST_OF_IDS]", Array, "List of network IDs to check") do |network|
+        options.network = network
+      end
+
+      opts.on("--check-storage [LIST_OF_IDS]", Array, "List of storage IDs to check") do |storage|
+        options.storage = storage
+      end
+
+      opts.on("--check-compute [LIST_OF_IDS]", Array, "List of VM IDs to check") do |compute|
+        options.compute = compute
+      end
+
       opts.separator ""
       opts.separator "Common options:"
 
