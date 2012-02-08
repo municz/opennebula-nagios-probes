@@ -30,7 +30,7 @@ class OptparseNagiosProbe
     options.timeout = 60
 
     opts = OptionParser.new do |opts|
-      opts.banner = "Usage: check_opennebula_[one|occi|econe].rb [options]"
+      opts.banner = "Usage: check_opennebula.rb [options]"
 
       opts.separator ""
       opts.separator "Connection options:"
