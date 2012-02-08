@@ -42,16 +42,18 @@ begin
   case options.service
     when :oned
       probe = OpenNebulaOnedProbe.new(options)
+      logger = Logger.new 'OpenNebulaOnedProbe'
     when :occi
       probe = OpenNebulaOcciProbe.new(options)
+      logger = Logger.new 'OpenNebulaOcciProbe'
     when :econe
       probe = OpenNebulaEconeProbe.new(options)
+      logger = Logger.new 'OpenNebulaEconeProbe'
     else
       raise Exception.new("This probe cannot check the specified service")
   end
 
-  logger = Logger.new 'OpenNebulaProbe'
-  logger.outputters = Outputter.stdout
+  logger.outputters = Outputter.stderr
   logger.level = ERROR unless options.debug
   probe.logger = logger
 

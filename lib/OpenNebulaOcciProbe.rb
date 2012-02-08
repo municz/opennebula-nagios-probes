@@ -23,23 +23,25 @@ class OpenNebulaOcciProbe < Nagios::Probe
   #
   def check_crit
 
-    @logger.debug "Checking ..."
+    @logger.info "Checking for basic connectivity at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s
 
     begin
 
       connection = Occi::Client.new(
-          :host     => @opts.one_host,
-          :port     => @opts.one_port,
-          :scheme   => @opts.proto,
-          :user     => @opts.one_user,
-          :password => @opts.one_pass
+          :host     => @opts.hostname,
+          :port     => @opts.port,
+          :scheme   => @opts.protocol,
+          :user     => @opts.username,
+          :password => @opts.password
       )
 
+      # make a few simple queries just to be sure that the service is running
       connection.network.all
       connection.compute.all
       connection.storage.all
 
     rescue Exception => e
+      @logger.error "Failed to check connectivity: " + e.message
       return true
     end
 
@@ -49,21 +51,36 @@ class OpenNebulaOcciProbe < Nagios::Probe
   #
   def check_warn
 
+    @logger.info "Checking for resource availability at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s
+
     begin
 
+      # there is nothing to test in this stage
+      if @opts.network.nil? && @opts.storage.nil? && @opts.compute.nil?
+        @logger.debug "There are no resources to check, for details on how to specify resources see --help"
+        return false
+      end
+
       connection = Occi::Client.new(
-          :host     => @opts.one_host,
-          :port     => @opts.one_port,
-          :scheme   => @opts.proto,
-          :user     => @opts.one_user,
-          :password => @opts.one_pass
+          :host     => @opts.hostname,
+          :port     => @opts.port,
+          :scheme   => @opts.protocol,
+          :user     => @opts.username,
+          :password => @opts.password
       )
 
-      connection.network.find 1
-      connection.compute.find 1
-      connection.storage.find 1
+      # iterate over given resources
+      @logger.debug "Looking for networks: " + @opts.network.inspect
+      @opts.network.collect {|id| connection.network.find id } unless @opts.network.nil?
+
+      @logger.debug "Looking for compute instances: " + @opts.compute.inspect
+      @opts.compute.collect {|id| connection.compute.find id } unless @opts.compute.nil?
+
+      @logger.debug "Looking for storage volumes: " + @opts.storage.inspect
+      @opts.storage.collect {|id| connection.storage.find id } unless @opts.storage.nil?
 
     rescue Exception => e
+      @logger.error "Failed to check resource availability: " + e.message
       return true
     end
 

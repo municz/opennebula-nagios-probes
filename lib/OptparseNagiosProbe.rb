@@ -24,9 +24,9 @@ class OptparseNagiosProbe
     options = OpenStruct.new
 
     options.debug = false
-    options.one_host = "localhost"
-    options.one_port = 4567
-    options.proto = :http
+    options.hostname = "localhost"
+    options.port = 4567
+    options.protocol = :http
     options.timeout = 60
 
     opts = OptionParser.new do |opts|
@@ -39,27 +39,27 @@ class OptparseNagiosProbe
         options.service = service
       end
 
-      opts.on("--host [HOSTNAME]", String, "Host to be queried") do |host|
-        options.one_host = host
+      opts.on("--hostname [HOSTNAME]", String, "Host to be queried") do |hostname|
+        options.hostname = hostname
       end
 
       opts.on("--port [PORT_NUMBER]", Integer, "Port to be queried") do |port|
-        options.one_port = port
+        options.port = port
       end
 
-      opts.on("--user [USERNAME]", String, "Username for authentication purposes") do |user|
-        options.one_user = user
+      opts.on("--username [USERNAME]", String, "Username for authentication purposes") do |username|
+        options.username = username
       end
 
-      opts.on("--password [PASSWORD]", String, "Password for authentication purposes") do |pass|
-        options.one_pass = pass
+      opts.on("--password [PASSWORD]", String, "Password for authentication purposes") do |password|
+        options.password = password
       end
 
       opts.separator ""
       opts.separator "Session options:"
 
-      opts.on("--protocol [http|https]", [:http, :https], "Protocol to use") do |proto|
-        options.proto = proto
+      opts.on("--protocol [http|https]", [:http, :https], "Protocol to use") do |protocol|
+        options.protocol = protocol
       end
 
       opts.on("--timeout [SECONDS]", Integer, "Timeout time in seconds") do |timeout|
@@ -69,15 +69,15 @@ class OptparseNagiosProbe
       opts.separator ""
       opts.separator "Service options:"
 
-      opts.on("--check-networks [LIST_OF_IDS]", Array, "List of network IDs to check") do |network|
+      opts.on("--check-network [LIST_OF_IDS]", Array, "Comma separated list of network IDs to check") do |network|
         options.network = network
       end
 
-      opts.on("--check-storages [LIST_OF_IDS]", Array, "List of storage IDs to check") do |storage|
+      opts.on("--check-storage [LIST_OF_IDS]", Array, "Comma separated list of storage IDs to check") do |storage|
         options.storage = storage
       end
 
-      opts.on("--check-computes [LIST_OF_IDS]", Array, "List of VM IDs to check") do |compute|
+      opts.on("--check-compute [LIST_OF_IDS]", Array, "Comma separated list of VM IDs to check") do |compute|
         options.compute = compute
       end
 
@@ -102,7 +102,7 @@ class OptparseNagiosProbe
 
     opts.parse!(args)
 
-    mandatory = [:one_user, :one_pass, :service]
+    mandatory = [:username, :password, :service]
     options_hash = options.marshal_dump
 
     missing = mandatory.select{ |param| options_hash[param].nil? }
