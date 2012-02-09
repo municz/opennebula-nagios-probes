@@ -41,21 +41,21 @@ class OpenNebulaOnedProbe < Nagios::Probe
     vnet_pool = VirtualNetworkPool.new(client, -1)
     rc = vnet_pool.info
     if OpenNebula.is_error?(rc)
-      @logger.error rc.message
+      @logger.error "Failed to check connectivity: " + rc.message
       return true
     end
 
     image_pool = ImagePool.new(client, -1)
     rc = image_pool.info
     if OpenNebula.is_error?(rc)
-      @logger.error rc.message
+      @logger.error "Failed to check connectivity: " + rc.message
       return true
     end
 
     vm_pool = VirtualMachinePool.new(client, -1)
     rc = vm_pool.info
     if OpenNebula.is_error?(rc)
-      @logger.error rc.message
+      @logger.error "Failed to check connectivity: " + rc.message
       return true
     end
 
@@ -73,56 +73,74 @@ class OpenNebulaOnedProbe < Nagios::Probe
 
     @logger.info "Checking for resource availability at " + endpoint
 
+    # there is nothing to test in this stage
+    if @opts.network.nil? && @opts.storage.nil? && @opts.compute.nil?
+      @logger.debug "There are no resources to check, for details on how to specify resources see --help"
+      return false
+    end
+
     client = Client.new(credentials, endpoint, true, @opts.timeout)
 
-    vnet_pool = VirtualNetworkPool.new(client, -1)
-    rc = vnet_pool.info
-    if OpenNebula.is_error?(rc)
-      @logger.error rc.message
-      return true
-    end
-
-    vnet_pool.each do |vnet|
-      rc = vnet.info
+    # check networks, if there are any
+    if !@opts.network.nil?
+      @logger.debug "Looking for networks: " + @opts.network.inspect
+      vnet_pool = VirtualNetworkPool.new(client, -1)
+      rc = vnet_pool.info
       if OpenNebula.is_error?(rc)
-        @logger.error rc.message
+        @logger.error "Failed to check resource availability: " + rc.message
         return true
-      else
-        @logger.debug rc.to_s
+      end
+
+      vnet_pool.each do |vnet|
+        rc = vnet.info
+        if OpenNebula.is_error?(rc)
+          @logger.error "Failed to check resource availability: " + rc.message
+          return true
+        else
+          @logger.debug vnet.id.to_s + " " + vnet.name
+        end
       end
     end
 
-    image_pool = VirtualMachinePool.new(client, -1)
-    rc = image_pool.info
-    if OpenNebula.is_error?(rc)
-      @logger.error rc.message
-      return true
-    end
-
-    image_pool.each do |image|
-      rc = image.info
+    # check storage, if there is some
+    if !@opts.storage.nil?
+      @logger.debug "Looking for storage volumes: " + @opts.storage.inspect
+      image_pool = ImagePool.new(client, -1)
+      rc = image_pool.info
       if OpenNebula.is_error?(rc)
-        @logger.error rc.message
+        @logger.error "Failed to check resource availability: " + rc.message
         return true
-      else
-        @logger.debug rc.to_s
+      end
+
+      image_pool.each do |image|
+        rc = image.info
+        if OpenNebula.is_error?(rc)
+          @logger.error "Failed to check resource availability: " + rc.message
+          return true
+        else
+          @logger.debug image.id.to_s + " " + image.name
+        end
       end
     end
 
-    vm_pool = VirtualMachinePool.new(client, -1)
-    rc = vm_pool.info
-    if OpenNebula.is_error?(rc)
-      @logger.error rc.message
-      return true
-    end
-
-    vm_pool.each do |vm|
-      rc = vm.info
+    # check VMs, if there are any
+    if !@opts.compute.nil?
+      @logger.debug "Looking for compute instances: " + @opts.compute.inspect
+      vm_pool = VirtualMachinePool.new(client, -1)
+      rc = vm_pool.info
       if OpenNebula.is_error?(rc)
-        @logger.error rc.message
+        @logger.error "Failed to check resource availability: " + rc.message
         return true
-      else
-        @logger.debug rc.to_s
+      end
+
+      vm_pool.each do |vm|
+        rc = vm.info
+        if OpenNebula.is_error?(rc)
+          @logger.error "Failed to check resource availability: " + rc.message
+          return true
+        else
+          @logger.debug vm.id.to_s + " " + vm.name
+        end
       end
     end
 
@@ -131,16 +149,16 @@ class OpenNebulaOnedProbe < Nagios::Probe
 
   #
   def crit_message
-    "Things are bad"
+    "Failed to establish connection with the remote server"
   end
 
   #
   def warn_message
-    "Things aren't going well"
+    "Failed to query specified remote resources"
   end
 
   #
   def ok_message
-    "Nothing to see here"
+    "Remote resources successfully queried"
   end
 end
