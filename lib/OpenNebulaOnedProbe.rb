@@ -12,7 +12,13 @@
 ## limitations under the License.
 ###########################################################################
 
+$: << File.expand_path("..", __FILE__) + "/oca"
+
 require 'nagios-probe'
+require 'OpenNebula'
+
+#
+include OpenNebula
 
 #
 class OpenNebulaOnedProbe < Nagios::Probe
@@ -22,13 +28,104 @@ class OpenNebulaOnedProbe < Nagios::Probe
   #
   def check_crit
 
-    @logger.debug "Checking ..."
+    # OpenNebula credentials
+    credentials = @opts.username + ":" + @opts.password
+
+    # XML_RPC endpoint where OpenNebula is listening
+    endpoint = @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + "/RPC2"
+
+    @logger.info "Checking for basic connectivity at " + endpoint
+
+    client = Client.new(credentials, endpoint, true, @opts.timeout)
+
+    vnet_pool = VirtualNetworkPool.new(client, -1)
+    rc = vnet_pool.info
+    if OpenNebula.is_error?(rc)
+      @logger.error rc.message
+      return true
+    end
+
+    image_pool = ImagePool.new(client, -1)
+    rc = image_pool.info
+    if OpenNebula.is_error?(rc)
+      @logger.error rc.message
+      return true
+    end
+
+    vm_pool = VirtualMachinePool.new(client, -1)
+    rc = vm_pool.info
+    if OpenNebula.is_error?(rc)
+      @logger.error rc.message
+      return true
+    end
 
     false
   end
 
   #
   def check_warn
+
+    # OpenNebula credentials
+    credentials = @opts.username + ":" + @opts.password
+
+    # XML_RPC endpoint where OpenNebula is listening
+    endpoint = @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + "/RPC2"
+
+    @logger.info "Checking for resource availability at " + endpoint
+
+    client = Client.new(credentials, endpoint, true, @opts.timeout)
+
+    vnet_pool = VirtualNetworkPool.new(client, -1)
+    rc = vnet_pool.info
+    if OpenNebula.is_error?(rc)
+      @logger.error rc.message
+      return true
+    end
+
+    vnet_pool.each do |vnet|
+      rc = vnet.info
+      if OpenNebula.is_error?(rc)
+        @logger.error rc.message
+        return true
+      else
+        @logger.debug rc.to_s
+      end
+    end
+
+    image_pool = VirtualMachinePool.new(client, -1)
+    rc = image_pool.info
+    if OpenNebula.is_error?(rc)
+      @logger.error rc.message
+      return true
+    end
+
+    image_pool.each do |image|
+      rc = image.info
+      if OpenNebula.is_error?(rc)
+        @logger.error rc.message
+        return true
+      else
+        @logger.debug rc.to_s
+      end
+    end
+
+    vm_pool = VirtualMachinePool.new(client, -1)
+    rc = vm_pool.info
+    if OpenNebula.is_error?(rc)
+      @logger.error rc.message
+      return true
+    end
+
+    vm_pool.each do |vm|
+      rc = vm.info
+      if OpenNebula.is_error?(rc)
+        @logger.error rc.message
+        return true
+      else
+        @logger.debug rc.to_s
+      end
+    end
+
     false
   end
 

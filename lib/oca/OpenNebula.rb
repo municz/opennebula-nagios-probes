@@ -85,7 +85,7 @@ module OpenNebula
             XMLPARSER=false
         end
 
-        def initialize(secret=nil, endpoint=nil, hash=true)
+        def initialize(secret=nil, endpoint=nil, hash=true, timeout=nil)
             if secret
                 one_secret = secret
             elsif ENV["ONE_AUTH"] and !ENV["ONE_AUTH"].empty? and File.file?(ENV["ONE_AUTH"])
@@ -119,7 +119,11 @@ module OpenNebula
                 @one_endpoint="http://localhost:2633/RPC2"
             end
 
-            @server=XMLRPC::Client.new2(@one_endpoint)
+            if timeout.nil?
+              @server=XMLRPC::Client.new2(@one_endpoint)
+            else
+              @server=XMLRPC::Client.new2(@one_endpoint, nil, timeout)
+            end
         end
 
         def call(action, *args)
