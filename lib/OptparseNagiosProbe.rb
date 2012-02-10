@@ -24,9 +24,16 @@ class OptparseNagiosProbe
     options = OpenStruct.new
 
     options.debug = false
+
     options.hostname = "localhost"
-    options.port = 4567
+    options.port = 2633
+    options.path = "/"
     options.protocol = :http
+    options.username = "oneadmin"
+    options.password = "onepass"
+
+    options.service = :oned
+
     options.timeout = 60
 
     opts = OptionParser.new do |opts|
@@ -35,39 +42,43 @@ class OptparseNagiosProbe
       opts.separator ""
       opts.separator "Connection options:"
 
-      opts.on("--service [SERVICE_NAME]", [:oned, :occi, :econe], "Name of the cloud service to check") do |service|
-        options.service = service
+      opts.on("--protocol [http|https]", [:http, :https], "Protocol to use, defaults to 'http'") do |protocol|
+        options.protocol = protocol
       end
 
-      opts.on("--hostname [HOSTNAME]", String, "Host to be queried") do |hostname|
+      opts.on("--hostname [HOSTNAME]", String, "Host to be queried, defaults to 'localhost'") do |hostname|
         options.hostname = hostname
       end
 
-      opts.on("--port [PORT_NUMBER]", Integer, "Port to be queried") do |port|
+      opts.on("--port [PORT_NUMBER]", Integer, "Port to be queried, defaults to '2633'") do |port|
         options.port = port
       end
 
-      opts.on("--username [USERNAME]", String, "Username for authentication purposes") do |username|
+      opts.on("--path [PATH]", String, "Path to the service endpoint (the last part of the URI, should always start with a slash), defaults to '/'") do |path|
+        options.path = path
+      end
+
+      opts.on("--username [USERNAME]", String, "Username for authentication purposes, defaults to 'oneadmin'") do |username|
         options.username = username
       end
 
-      opts.on("--password [PASSWORD]", String, "Password for authentication purposes") do |password|
+      opts.on("--password [PASSWORD]", String, "Password for authentication purposes, defaults to 'onepass'") do |password|
         options.password = password
       end
 
       opts.separator ""
       opts.separator "Session options:"
 
-      opts.on("--protocol [http|https]", [:http, :https], "Protocol to use") do |protocol|
-        options.protocol = protocol
-      end
-
-      opts.on("--timeout [SECONDS]", Integer, "Timeout time in seconds") do |timeout|
+      opts.on("--timeout [SECONDS]", Integer, "Timeout time in seconds, defaults to '60'") do |timeout|
         options.timeout = timeout
       end
 
       opts.separator ""
       opts.separator "Service options:"
+
+      opts.on("--service [SERVICE_NAME]", [:oned, :occi, :econe], "Name of the cloud service to check, defaults to 'oned'") do |service|
+        options.service = service
+      end
 
       opts.on("--check-network [LIST_OF_IDS]", Array, "Comma separated list of network IDs to check") do |network|
         options.network = network
@@ -84,7 +95,7 @@ class OptparseNagiosProbe
       opts.separator ""
       opts.separator "Common options:"
 
-      opts.on("--[no-]debug", "Run with debugging options") do |debug|
+      opts.on("--[no-]debug", "Run with debugging options, defaults to 'no-debug'") do |debug|
         options.debug = debug
       end
 
@@ -102,7 +113,7 @@ class OptparseNagiosProbe
 
     opts.parse!(args)
 
-    mandatory = [:username, :password, :service]
+    mandatory = [:protocol, :hostname, :port, :path, :service, :username, :password]
     options_hash = options.marshal_dump
 
     missing = mandatory.select{ |param| options_hash[param].nil? }

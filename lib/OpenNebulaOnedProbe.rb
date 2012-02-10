@@ -12,7 +12,7 @@
 ## limitations under the License.
 ###########################################################################
 
-$: << File.expand_path("..", __FILE__) + "/oca"
+$: << File.expand_path("..", __FILE__) + '/oca'
 
 require 'nagios-probe'
 require 'OpenNebula'
@@ -32,7 +32,7 @@ class OpenNebulaOnedProbe < Nagios::Probe
     credentials = @opts.username + ":" + @opts.password
 
     # XML_RPC endpoint where OpenNebula is listening
-    endpoint = @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + "/RPC2"
+    endpoint = @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
 
     @logger.info "Checking for basic connectivity at " + endpoint
 
@@ -69,7 +69,7 @@ class OpenNebulaOnedProbe < Nagios::Probe
     credentials = @opts.username + ":" + @opts.password
 
     # XML_RPC endpoint where OpenNebula is listening
-    endpoint = @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + "/RPC2"
+    endpoint = @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
 
     @logger.info "Checking for resource availability at " + endpoint
 
@@ -82,7 +82,7 @@ class OpenNebulaOnedProbe < Nagios::Probe
     client = Client.new(credentials, endpoint, true, @opts.timeout)
 
     # check networks, if there are any
-    if !@opts.network.nil?
+    unless @opts.network.nil?
       @logger.debug "Looking for networks: " + @opts.network.inspect
       vnet_pool = VirtualNetworkPool.new(client, -1)
       rc = vnet_pool.info
@@ -103,7 +103,7 @@ class OpenNebulaOnedProbe < Nagios::Probe
     end
 
     # check storage, if there is some
-    if !@opts.storage.nil?
+    unless @opts.storage.nil?
       @logger.debug "Looking for storage volumes: " + @opts.storage.inspect
       image_pool = ImagePool.new(client, -1)
       rc = image_pool.info
@@ -124,7 +124,7 @@ class OpenNebulaOnedProbe < Nagios::Probe
     end
 
     # check VMs, if there are any
-    if !@opts.compute.nil?
+    unless @opts.compute.nil?
       @logger.debug "Looking for compute instances: " + @opts.compute.inspect
       vm_pool = VirtualMachinePool.new(client, -1)
       rc = vm_pool.info

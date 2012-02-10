@@ -23,7 +23,7 @@ class OpenNebulaOcciProbe < Nagios::Probe
   #
   def check_crit
 
-    @logger.info "Checking for basic connectivity at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s
+    @logger.info "Checking for basic connectivity at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
 
     begin
 
@@ -51,7 +51,7 @@ class OpenNebulaOcciProbe < Nagios::Probe
   #
   def check_warn
 
-    @logger.info "Checking for resource availability at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s
+    @logger.info "Checking for resource availability at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
 
     begin
 
