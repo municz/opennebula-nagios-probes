@@ -25,21 +25,19 @@ class OpenNebulaOcciProbe < Nagios::Probe
 
     @logger.info "Checking for basic connectivity at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
 
+    connection = Occi::Client.new(
+        :host     => @opts.hostname,
+        :port     => @opts.port,
+        :scheme   => @opts.protocol,
+        :user     => @opts.username,
+        :password => @opts.password
+    )
+
     begin
-
-      connection = Occi::Client.new(
-          :host     => @opts.hostname,
-          :port     => @opts.port,
-          :scheme   => @opts.protocol,
-          :user     => @opts.username,
-          :password => @opts.password
-      )
-
       # make a few simple queries just to be sure that the service is running
       connection.network.all
       connection.compute.all
       connection.storage.all
-
     rescue Exception => e
       @logger.error "Failed to check connectivity: " + e.message
       return true
@@ -53,22 +51,21 @@ class OpenNebulaOcciProbe < Nagios::Probe
 
     @logger.info "Checking for resource availability at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
 
+    # there is nothing to test in this stage
+    if @opts.network.nil? && @opts.storage.nil? && @opts.compute.nil?
+      @logger.debug "There are no resources to check, for details on how to specify resources see --help"
+      return false
+    end
+
+    connection = Occi::Client.new(
+        :host     => @opts.hostname,
+        :port     => @opts.port,
+        :scheme   => @opts.protocol,
+        :user     => @opts.username,
+        :password => @opts.password
+    )
+
     begin
-
-      # there is nothing to test in this stage
-      if @opts.network.nil? && @opts.storage.nil? && @opts.compute.nil?
-        @logger.debug "There are no resources to check, for details on how to specify resources see --help"
-        return false
-      end
-
-      connection = Occi::Client.new(
-          :host     => @opts.hostname,
-          :port     => @opts.port,
-          :scheme   => @opts.protocol,
-          :user     => @opts.username,
-          :password => @opts.password
-      )
-
       # iterate over given resources
       @logger.debug "Looking for networks: " + @opts.network.inspect
       @opts.network.collect {|id| connection.network.find id } unless @opts.network.nil?
@@ -78,7 +75,6 @@ class OpenNebulaOcciProbe < Nagios::Probe
 
       @logger.debug "Looking for storage volumes: " + @opts.storage.inspect
       @opts.storage.collect {|id| connection.storage.find id } unless @opts.storage.nil?
-
     rescue Exception => e
       @logger.error "Failed to check resource availability: " + e.message
       return true
