@@ -1,6 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    amazon-ec2 (0.9.17)
+      xml-simple (>= 1.0.12)
     hugs (2.3.0)
       multipart-post (~> 1.0.1)
       net-http-persistent (~> 1.4.1)
@@ -15,12 +17,14 @@ GEM
       hugs (~> 2.3.0)
       multipart-post (~> 1.0.1)
       nokogiri (~> 1.4.4)
+    xml-simple (1.1.1)
     yajl-ruby (0.7.9)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  amazon-ec2
   log4r
   nagios-probe
   occi

@@ -13,6 +13,7 @@
 ###########################################################################
 
 require 'nagios-probe'
+require 'AWS'
 
 #
 class OpenNebulaEconeProbe < Nagios::Probe
@@ -22,13 +23,42 @@ class OpenNebulaEconeProbe < Nagios::Probe
   #
   def check_crit
 
-    @logger.debug "Checking ..."
+    @logger.info "Checking for basic connectivity at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
+
+    ec2_connection = AWS::EC2::Base.new(
+        :access_key_id     => @opts.username,
+        :secret_access_key => @opts.password,
+        :server            => @opts.hostname,
+        :port              => @opts.port,
+        :path              => @opts.path,
+        :use_ssl           => @opts.protocol == :https
+    )
+
+    begin
+      ec2_connection.describe_images
+      ec2_connection.describe_instances
+    rescue Exception => e
+      @logger.error "Failed to check connectivity: " + e.message
+      return true
+    end
 
     false
   end
 
   #
   def check_warn
+
+    @logger.info "Checking for resource availability at " + @opts.protocol.to_s + "://" + @opts.hostname + ":" + @opts.port.to_s + @opts.path
+
+    ec2_connection = AWS::EC2::Base.new(
+        :access_key_id     => @opts.username,
+        :secret_access_key => @opts.password,
+        :server            => @opts.hostname,
+        :port              => @opts.port,
+        :path              => @opts.path,
+        :use_ssl           => @opts.protocol == :https
+    )
+
     false
   end
 
