@@ -6,11 +6,13 @@ These probes are written in Ruby, Gemfile for bundler is included.
 [[Usage]]
 
 ./check_opennebula.rb --username <USERNAME> --password <PASSWORD> --hostname <HOSTNAME> --port <PORT_NUMBER>  --service occi
+./check_opennebula.rb --username <USERNAME> --password <PASSWORD> --hostname <HOSTNAME> --port <PORT_NUMBER> --path /RPC2  --service oned
+./check_opennebula.rb --username <USERNAME> --password <PASSWORD> --hostname <HOSTNAME> --port <PORT_NUMBER>  --service econe
 
 and with optional
     --protocol [https | http]
     --debug
-    --check-network <ID>,<ID>,<ID>,...
+    --check-network <ID>,<ID>,<ID>,... (this option is ignored by the ECONE probe)
     --check-storage <ID>,<ID>,<ID>,...
     --check-compute <ID>,<ID>,<ID>,...
 
