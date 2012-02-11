@@ -53,7 +53,7 @@ class OpenNebulaOcciProbe < Nagios::Probe
 
     # there is nothing to test in this stage
     if @opts.network.nil? && @opts.storage.nil? && @opts.compute.nil?
-      @logger.debug "There are no resources to check, for details on how to specify resources see --help"
+      @logger.info "There are no resources to check, for details on how to specify resources see --help"
       return false
     end
 
@@ -67,14 +67,23 @@ class OpenNebulaOcciProbe < Nagios::Probe
 
     begin
       # iterate over given resources
-      @logger.debug "Looking for networks: " + @opts.network.inspect
-      @opts.network.collect {|id| connection.network.find id } unless @opts.network.nil?
+      unless @opts.network.nil?
+        @logger.info "Looking for networks: " + @opts.network.inspect
+        result = @opts.network.collect {|id| connection.network.find id }
+        @logger.debug result
+      end
 
-      @logger.debug "Looking for compute instances: " + @opts.compute.inspect
-      @opts.compute.collect {|id| connection.compute.find id } unless @opts.compute.nil?
+      unless @opts.compute.nil?
+        @logger.info "Looking for compute instances: " + @opts.compute.inspect
+        result = @opts.compute.collect {|id| connection.compute.find id }
+        @logger.debug result
+      end
 
-      @logger.debug "Looking for storage volumes: " + @opts.storage.inspect
-      @opts.storage.collect {|id| connection.storage.find id } unless @opts.storage.nil?
+      unless @opts.storage.nil?
+        @logger.info "Looking for storage volumes: " + @opts.storage.inspect
+        result = @opts.storage.collect {|id| connection.storage.find id }
+        @logger.debug result
+      end
     rescue Exception => e
       @logger.error "Failed to check resource availability: " + e.message
       return true

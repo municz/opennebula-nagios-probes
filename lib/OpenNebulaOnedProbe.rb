@@ -75,7 +75,7 @@ class OpenNebulaOnedProbe < Nagios::Probe
 
     # there is nothing to test in this stage
     if @opts.network.nil? && @opts.storage.nil? && @opts.compute.nil?
-      @logger.debug "There are no resources to check, for details on how to specify resources see --help"
+      @logger.info "There are no resources to check, for details on how to specify resources see --help"
       return false
     end
 
@@ -83,7 +83,7 @@ class OpenNebulaOnedProbe < Nagios::Probe
 
     # check networks, if there are any
     unless @opts.network.nil?
-      @logger.debug "Looking for networks: " + @opts.network.inspect
+      @logger.info "Looking for networks: " + @opts.network.inspect
       vnet_pool = VirtualNetworkPool.new(client, -1)
       rc = vnet_pool.info
       if OpenNebula.is_error?(rc)
@@ -91,20 +91,32 @@ class OpenNebulaOnedProbe < Nagios::Probe
         return true
       end
 
-      vnet_pool.each do |vnet|
-        rc = vnet.info
-        if OpenNebula.is_error?(rc)
-          @logger.error "Failed to check resource availability: " + rc.message
+      @opts.network.each do |vnet_to_look_for|
+        found = false
+
+        vnet_pool.each do |vnet|
+          rc = vnet.info
+
+          if OpenNebula.is_error?(rc)
+            @logger.error "Failed to check resource availability: " + rc.message
+            return true
+          end
+
+          if vnet.id.to_s == vnet_to_look_for
+            found = true
+          end
+        end
+
+        unless found
+          @logger.error "Failed to check resource availability: Network " + vnet_to_look_for + " not found"
           return true
-        else
-          @logger.debug vnet.id.to_s + " " + vnet.name
         end
       end
     end
 
     # check storage, if there is some
     unless @opts.storage.nil?
-      @logger.debug "Looking for storage volumes: " + @opts.storage.inspect
+      @logger.info "Looking for storage volumes: " + @opts.storage.inspect
       image_pool = ImagePool.new(client, -1)
       rc = image_pool.info
       if OpenNebula.is_error?(rc)
@@ -112,20 +124,32 @@ class OpenNebulaOnedProbe < Nagios::Probe
         return true
       end
 
-      image_pool.each do |image|
-        rc = image.info
-        if OpenNebula.is_error?(rc)
-          @logger.error "Failed to check resource availability: " + rc.message
+      @opts.storage.each do |image_to_look_for|
+        found = false
+
+        image_pool.each do |image|
+          rc = image.info
+
+          if OpenNebula.is_error?(rc)
+            @logger.error "Failed to check resource availability: " + rc.message
+            return true
+          end
+
+          if image.id.to_s == image_to_look_for
+            found = true
+          end
+        end
+
+        unless found
+          @logger.error "Failed to check resource availability: Image " + image_to_look_for + " not found"
           return true
-        else
-          @logger.debug image.id.to_s + " " + image.name
         end
       end
     end
 
     # check VMs, if there are any
     unless @opts.compute.nil?
-      @logger.debug "Looking for compute instances: " + @opts.compute.inspect
+      @logger.info "Looking for compute instances: " + @opts.compute.inspect
       vm_pool = VirtualMachinePool.new(client, -1)
       rc = vm_pool.info
       if OpenNebula.is_error?(rc)
@@ -133,13 +157,25 @@ class OpenNebulaOnedProbe < Nagios::Probe
         return true
       end
 
-      vm_pool.each do |vm|
-        rc = vm.info
-        if OpenNebula.is_error?(rc)
-          @logger.error "Failed to check resource availability: " + rc.message
+      @opts.compute.each do |instance_to_look_for|
+        found = false
+
+        vm_pool.each do |vm|
+          rc = vm.info
+
+          if OpenNebula.is_error?(rc)
+            @logger.error "Failed to check resource availability: " + rc.message
+            return true
+          end
+
+          if vm.id.to_s == instance_to_look_for
+            found = true
+          end
+        end
+
+        unless found
+          @logger.error "Failed to check resource availability: Instance " + instance_to_look_for + " not found"
           return true
-        else
-          @logger.debug vm.id.to_s + " " + vm.name
         end
       end
     end
