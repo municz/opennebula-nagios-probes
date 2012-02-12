@@ -15,7 +15,8 @@
 ###########################################################################
 
 #
-$: << File.expand_path("..", __FILE__)
+$: << File.expand_path("..", __FILE__) + '/lib'
+$: << File.expand_path("..", __FILE__) + '/lib/oca'
 
 #
 require 'rubygems'
@@ -23,16 +24,23 @@ require 'bundler/setup'
 
 #
 require 'nagios-probe'
+require 'AWS'
+require 'occi'
 require 'log4r'
+require 'optparse'
+require 'ostruct'
+
+require 'OpenNebula'
 
 #
-require 'lib/OpenNebulaOnedProbe'
-require 'lib/OpenNebulaOcciProbe'
-require 'lib/OpenNebulaEconeProbe'
-require 'lib/OptparseNagiosProbe'
-
-#
+include OpenNebula
 include Log4r
+
+#
+require 'OpenNebulaOnedProbe'
+require 'OpenNebulaOcciProbe'
+require 'OpenNebulaEconeProbe'
+require 'OptparseNagiosProbe'
 
 #
 begin

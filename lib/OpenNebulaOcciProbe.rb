@@ -12,9 +12,6 @@
 ## limitations under the License.
 ###########################################################################
 
-require 'nagios-probe'
-require 'occi'
-
 #
 class OpenNebulaOcciProbe < Nagios::Probe
 
