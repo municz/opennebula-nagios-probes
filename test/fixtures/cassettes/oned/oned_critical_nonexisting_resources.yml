@@ -1,0 +1,90 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:2633/RPC2
+    body: ! '<?xml version="1.0" ?><methodCall><methodName>one.vnpool.info</methodName><params><param><value><string>oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605</string></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param></params></methodCall>
+
+'
+    headers:
+      user-agent:
+      - XMLRPC::Client (Ruby 1.9.2)
+      content-type:
+      - text/xml; charset=utf-8
+      content-length:
+      - '322'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 11:03:16 GMT
+      content-type:
+      - text/xml; charset="utf-8"
+      content-length:
+      - '2117'
+    body: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;VNET_POOL&gt;&lt;VNET&gt;&lt;ID&gt;4&lt;/ID&gt;&lt;UID&gt;0&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;oneadmin&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;public&lt;/NAME&gt;&lt;TYPE&gt;1&lt;/TYPE&gt;&lt;BRIDGE&gt;xenbr0&lt;/BRIDGE&gt;&lt;PUBLIC&gt;1&lt;/PUBLIC&gt;&lt;TOTAL_LEASES&gt;0&lt;/TOTAL_LEASES&gt;&lt;TEMPLATE&gt;&lt;BRIDGE&gt;&lt;![CDATA[xenbr0]]&gt;&lt;/BRIDGE&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.232]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.233]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.234]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.235]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.236]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.237]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.238]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.239]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;NAME&gt;&lt;![CDATA[public]]&gt;&lt;/NAME&gt;&lt;TYPE&gt;&lt;![CDATA[FIXED]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;/VNET&gt;&lt;VNET&gt;&lt;ID&gt;6&lt;/ID&gt;&lt;UID&gt;24&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;occi11&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;monitoring&lt;/NAME&gt;&lt;TYPE&gt;0&lt;/TYPE&gt;&lt;BRIDGE&gt;xenbr0&lt;/BRIDGE&gt;&lt;PUBLIC&gt;0&lt;/PUBLIC&gt;&lt;TOTAL_LEASES&gt;1&lt;/TOTAL_LEASES&gt;&lt;TEMPLATE&gt;&lt;BRIDGE&gt;&lt;![CDATA[xenbr0]]&gt;&lt;/BRIDGE&gt;&lt;NAME&gt;&lt;![CDATA[monitoring]]&gt;&lt;/NAME&gt;&lt;NETWORK_ADDRESS&gt;&lt;![CDATA[192.168.254.0]]&gt;&lt;/NETWORK_ADDRESS&gt;&lt;NETWORK_SIZE&gt;&lt;![CDATA[254]]&gt;&lt;/NETWORK_SIZE&gt;&lt;TYPE&gt;&lt;![CDATA[RANGED]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;/VNET&gt;&lt;/VNET_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:2633/RPC2
+    body: ! '<?xml version="1.0" ?><methodCall><methodName>one.imagepool.info</methodName><params><param><value><string>oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605</string></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param></params></methodCall>
+
+'
+    headers:
+      user-agent:
+      - XMLRPC::Client (Ruby 1.9.2)
+      content-type:
+      - text/xml; charset=utf-8
+      content-length:
+      - '325'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 11:03:33 GMT
+      content-type:
+      - text/xml; charset="utf-8"
+      content-length:
+      - '2123'
+    body: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;IMAGE_POOL&gt;&lt;IMAGE&gt;&lt;ID&gt;16&lt;/ID&gt;&lt;UID&gt;0&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;oneadmin&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;suse&lt;/NAME&gt;&lt;TYPE&gt;0&lt;/TYPE&gt;&lt;PUBLIC&gt;1&lt;/PUBLIC&gt;&lt;PERSISTENT&gt;0&lt;/PERSISTENT&gt;&lt;REGTIME&gt;1322571984&lt;/REGTIME&gt;&lt;SOURCE&gt;/opt/opennebula/var/images/485ac1f8db8dc6e34d74cab8893d6103&lt;/SOURCE&gt;&lt;SIZE&gt;1155&lt;/SIZE&gt;&lt;STATE&gt;1&lt;/STATE&gt;&lt;RUNNING_VMS&gt;0&lt;/RUNNING_VMS&gt;&lt;TEMPLATE&gt;&lt;BUS&gt;&lt;![CDATA[SCSI]]&gt;&lt;/BUS&gt;&lt;DESCRIPTION&gt;&lt;![CDATA[suse
+      with echoserver]]&gt;&lt;/DESCRIPTION&gt;&lt;DEV_PREFIX&gt;&lt;![CDATA[xvda]]&gt;&lt;/DEV_PREFIX&gt;&lt;NAME&gt;&lt;![CDATA[suse]]&gt;&lt;/NAME&gt;&lt;PATH&gt;&lt;![CDATA[/tmp/suse+echoserver.raw]]&gt;&lt;/PATH&gt;&lt;TYPE&gt;&lt;![CDATA[OS]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;/IMAGE&gt;&lt;IMAGE&gt;&lt;ID&gt;26&lt;/ID&gt;&lt;UID&gt;24&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;occi11&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;monitoring&lt;/NAME&gt;&lt;TYPE&gt;0&lt;/TYPE&gt;&lt;PUBLIC&gt;0&lt;/PUBLIC&gt;&lt;PERSISTENT&gt;0&lt;/PERSISTENT&gt;&lt;REGTIME&gt;1328646668&lt;/REGTIME&gt;&lt;SOURCE&gt;/opt/opennebula/var/images/a72565ff2b4975963b83dd7ea7d28751&lt;/SOURCE&gt;&lt;SIZE&gt;106&lt;/SIZE&gt;&lt;STATE&gt;2&lt;/STATE&gt;&lt;RUNNING_VMS&gt;1&lt;/RUNNING_VMS&gt;&lt;TEMPLATE&gt;&lt;BUS&gt;&lt;![CDATA[IDE]]&gt;&lt;/BUS&gt;&lt;DESCRIPTION&gt;&lt;![CDATA[Image
+      for monitoring purposes]]&gt;&lt;/DESCRIPTION&gt;&lt;DEV_PREFIX&gt;&lt;![CDATA[xvd]]&gt;&lt;/DEV_PREFIX&gt;&lt;NAME&gt;&lt;![CDATA[monitoring]]&gt;&lt;/NAME&gt;&lt;PATH&gt;&lt;![CDATA[/home/xparak/openwrt-x86-xen_domu-combined-ext4.img]]&gt;&lt;/PATH&gt;&lt;TYPE&gt;&lt;![CDATA[OS]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;/IMAGE&gt;&lt;/IMAGE_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:2633/RPC2
+    body: ! '<?xml version="1.0" ?><methodCall><methodName>one.vmpool.info</methodName><params><param><value><string>oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605</string></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param></params></methodCall>
+
+'
+    headers:
+      user-agent:
+      - XMLRPC::Client (Ruby 1.9.2)
+      content-type:
+      - text/xml; charset=utf-8
+      content-length:
+      - '363'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 11:03:50 GMT
+      content-type:
+      - text/xml; charset="utf-8"
+      content-length:
+      - '289'
+    body: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;VM_POOL&gt;&lt;/VM_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: '1.1'

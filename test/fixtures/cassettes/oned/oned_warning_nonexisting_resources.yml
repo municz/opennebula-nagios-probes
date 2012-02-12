@@ -1,0 +1,88 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:2633/RPC2
+    body: ! '<?xml version="1.0" ?><methodCall><methodName>one.vnpool.info</methodName><params><param><value><string>oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605</string></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param><param><value><i4>-1</i4></value></param></params></methodCall>
+
+'
+    headers:
+      user-agent:
+      - XMLRPC::Client (Ruby 1.9.2)
+      content-type:
+      - text/xml; charset=utf-8
+      content-length:
+      - '322'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 11:28:25 GMT
+      content-type:
+      - text/xml; charset="utf-8"
+      content-length:
+      - '2117'
+    body: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;VNET_POOL&gt;&lt;VNET&gt;&lt;ID&gt;4&lt;/ID&gt;&lt;UID&gt;0&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;oneadmin&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;public&lt;/NAME&gt;&lt;TYPE&gt;1&lt;/TYPE&gt;&lt;BRIDGE&gt;xenbr0&lt;/BRIDGE&gt;&lt;PUBLIC&gt;1&lt;/PUBLIC&gt;&lt;TOTAL_LEASES&gt;0&lt;/TOTAL_LEASES&gt;&lt;TEMPLATE&gt;&lt;BRIDGE&gt;&lt;![CDATA[xenbr0]]&gt;&lt;/BRIDGE&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.232]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.233]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.234]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.235]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.236]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.237]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.238]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.239]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;NAME&gt;&lt;![CDATA[public]]&gt;&lt;/NAME&gt;&lt;TYPE&gt;&lt;![CDATA[FIXED]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;/VNET&gt;&lt;VNET&gt;&lt;ID&gt;6&lt;/ID&gt;&lt;UID&gt;24&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;occi11&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;monitoring&lt;/NAME&gt;&lt;TYPE&gt;0&lt;/TYPE&gt;&lt;BRIDGE&gt;xenbr0&lt;/BRIDGE&gt;&lt;PUBLIC&gt;0&lt;/PUBLIC&gt;&lt;TOTAL_LEASES&gt;1&lt;/TOTAL_LEASES&gt;&lt;TEMPLATE&gt;&lt;BRIDGE&gt;&lt;![CDATA[xenbr0]]&gt;&lt;/BRIDGE&gt;&lt;NAME&gt;&lt;![CDATA[monitoring]]&gt;&lt;/NAME&gt;&lt;NETWORK_ADDRESS&gt;&lt;![CDATA[192.168.254.0]]&gt;&lt;/NETWORK_ADDRESS&gt;&lt;NETWORK_SIZE&gt;&lt;![CDATA[254]]&gt;&lt;/NETWORK_SIZE&gt;&lt;TYPE&gt;&lt;![CDATA[RANGED]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;/VNET&gt;&lt;/VNET_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:2633/RPC2
+    body: ! '<?xml version="1.0" ?><methodCall><methodName>one.vn.info</methodName><params><param><value><string>oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605</string></value></param><param><value><i4>4</i4></value></param></params></methodCall>
+
+'
+    headers:
+      user-agent:
+      - XMLRPC::Client (Ruby 1.9.2)
+      content-type:
+      - text/xml; charset=utf-8
+      content-length:
+      - '235'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 11:28:42 GMT
+      content-type:
+      - text/xml; charset="utf-8"
+      content-length:
+      - '2665'
+    body: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;VNET&gt;&lt;ID&gt;4&lt;/ID&gt;&lt;UID&gt;0&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;oneadmin&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;public&lt;/NAME&gt;&lt;TYPE&gt;1&lt;/TYPE&gt;&lt;BRIDGE&gt;xenbr0&lt;/BRIDGE&gt;&lt;PUBLIC&gt;1&lt;/PUBLIC&gt;&lt;TOTAL_LEASES&gt;0&lt;/TOTAL_LEASES&gt;&lt;TEMPLATE&gt;&lt;BRIDGE&gt;&lt;![CDATA[xenbr0]]&gt;&lt;/BRIDGE&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.232]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.233]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.234]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.235]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.236]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.237]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.238]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;LEASES&gt;&lt;IP&gt;&lt;![CDATA[147.251.9.239]]&gt;&lt;/IP&gt;&lt;/LEASES&gt;&lt;NAME&gt;&lt;![CDATA[public]]&gt;&lt;/NAME&gt;&lt;TYPE&gt;&lt;![CDATA[FIXED]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;LEASES&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.232&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:e8&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.233&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:e9&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.234&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:ea&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.235&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:eb&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.236&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:ec&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.237&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:ed&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.238&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:ee&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;LEASE&gt;&lt;IP&gt;147.251.9.239&lt;/IP&gt;&lt;MAC&gt;02:00:93:fb:09:ef&lt;/MAC&gt;&lt;USED&gt;0&lt;/USED&gt;&lt;VID&gt;-1&lt;/VID&gt;&lt;/LEASE&gt;&lt;/LEASES&gt;&lt;/VNET&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:2633/RPC2
+    body: ! '<?xml version="1.0" ?><methodCall><methodName>one.vn.info</methodName><params><param><value><string>oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605</string></value></param><param><value><i4>6</i4></value></param></params></methodCall>
+
+'
+    headers:
+      user-agent:
+      - XMLRPC::Client (Ruby 1.9.2)
+      content-type:
+      - text/xml; charset=utf-8
+      content-length:
+      - '235'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 11:28:59 GMT
+      content-type:
+      - text/xml; charset="utf-8"
+      content-length:
+      - '1102'
+    body: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;VNET&gt;&lt;ID&gt;6&lt;/ID&gt;&lt;UID&gt;24&lt;/UID&gt;&lt;GID&gt;100&lt;/GID&gt;&lt;UNAME&gt;occi11&lt;/UNAME&gt;&lt;GNAME&gt;fedcloud&lt;/GNAME&gt;&lt;NAME&gt;monitoring&lt;/NAME&gt;&lt;TYPE&gt;0&lt;/TYPE&gt;&lt;BRIDGE&gt;xenbr0&lt;/BRIDGE&gt;&lt;PUBLIC&gt;0&lt;/PUBLIC&gt;&lt;TOTAL_LEASES&gt;1&lt;/TOTAL_LEASES&gt;&lt;TEMPLATE&gt;&lt;BRIDGE&gt;&lt;![CDATA[xenbr0]]&gt;&lt;/BRIDGE&gt;&lt;NAME&gt;&lt;![CDATA[monitoring]]&gt;&lt;/NAME&gt;&lt;NETWORK_ADDRESS&gt;&lt;![CDATA[192.168.254.0]]&gt;&lt;/NETWORK_ADDRESS&gt;&lt;NETWORK_SIZE&gt;&lt;![CDATA[254]]&gt;&lt;/NETWORK_SIZE&gt;&lt;TYPE&gt;&lt;![CDATA[RANGED]]&gt;&lt;/TYPE&gt;&lt;/TEMPLATE&gt;&lt;LEASES&gt;&lt;LEASE&gt;&lt;IP&gt;192.168.254.1&lt;/IP&gt;&lt;MAC&gt;02:00:c0:a8:fe:01&lt;/MAC&gt;&lt;USED&gt;1&lt;/USED&gt;&lt;VID&gt;144&lt;/VID&gt;&lt;/LEASE&gt;&lt;/LEASES&gt;&lt;/VNET&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: '1.1'
