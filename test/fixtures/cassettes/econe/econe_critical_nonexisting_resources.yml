@@ -1,0 +1,82 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:4568/
+    body: AWSAccessKeyId=oneadmin&Action=DescribeImages&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2012-02-12T14%3A52%3A40Z&Version=2010-08-31&Signature=1xo95PYyLCelwnyFg6VDZHIJOd03WjfQjbZwlX11zqY%3D
+    headers:
+      user-agent:
+      - github-amazon-ec2-ruby-gem
+      content-type:
+      - application/x-www-form-urlencoded
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 14:53:00 GMT
+      content-type:
+      - application/xml
+      connection:
+      - keep-alive
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '823'
+    body: ! "<?xml version=\"1.0\"?>\n<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2010-08-31/\">
+      \n\t<imagesSet>\n\t   \t\n\t   \t\n\t \t<item>\n\t\t   \t<imageId>ami-00000016</imageId>
+      \n\t\t   \t<imageLocation>485ac1f8db8dc6e34d74cab8893d6103</imageLocation> \n\t\t\t\n\t\t\t<imageState>available</imageState>\n\t\t\t\n\t\t\t<imageOwnerId>oneadmin</imageOwnerId>\n\t\t\t\n\t\t\t<isPublic>true</isPublic>\n\t\t\t\n\t\t\t<architecture>i386</architecture>\n\t\t\t<imageType>machine</imageType>\n\t\t</item>\n\t\t\n\t
+      \  \t\n\t \t<item>\n\t\t   \t<imageId>ami-00000026</imageId> \n\t\t   \t<imageLocation>a72565ff2b4975963b83dd7ea7d28751</imageLocation>
+      \n\t\t\t\n\t\t\t<imageState>available</imageState>\n\t\t\t\n\t\t\t<imageOwnerId>occi11</imageOwnerId>\n\t\t\t\n\t\t\t<isPublic>false</isPublic>\n\t\t\t\n\t\t\t<architecture>i386</architecture>\n\t\t\t<imageType>machine</imageType>\n\t\t</item>\n\t\t\n\t</imagesSet>\n</DescribeImagesResponse>\n"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://localhost:4568/
+    body: AWSAccessKeyId=oneadmin&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2012-02-12T14%3A53%3A00Z&Version=2010-08-31&Signature=Tkje9PnPI51YTM3n6QtDpoo6pWyfpnE%2Bjprw3oQay9I%3D
+    headers:
+      user-agent:
+      - github-amazon-ec2-ruby-gem
+      content-type:
+      - application/x-www-form-urlencoded
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 14:53:20 GMT
+      content-type:
+      - application/xml
+      connection:
+      - keep-alive
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '1334'
+    body: ! "<?xml version=\"1.0\"?>\n<DescribeInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2010-08-31/\">
+      \n  <requestId>4ac62eaf-e266-4058-a970-2c01568cd417</requestId>\n  <reservationSet>
+      \n    <item> \n      <reservationId>default</reservationId> \n      <ownerId>occi11</ownerId>
+      \n      <groupSet> \n        <item> \n          <groupId>default</groupId> \n
+      \       </item> \n      </groupSet> \n      <instancesSet> \n        \n        \n
+      \       <item> \n          <instanceId>i-145</instanceId> \n          <imageId></imageId>
+      \n          <instanceState> \n              <code>16</code>\n        <name>running</name>\n
+      \         </instanceState> \n          <privateDnsName>192.168.254.1</privateDnsName>
+      \n          <dnsName>192.168.254.1</dnsName> \n          <keyName>default</keyName>
+      \n          <amiLaunchIndex>0</amiLaunchIndex> \n          <productCodes/>\n
+      \         <instanceType></instanceType> \n          <launchTime>2012-02-12T14:47:49+01:00</launchTime>\n
+      \         <placement> \n            <availabilityZone>default</availabilityZone>
+      \n          </placement> \n          \n          <kernelId>eki-EA801065</kernelId>\n
+      \         <ramdiskId>eri-1FEE1144</ramdiskId>\n          <monitoring>\n            <state>false</state>\n
+      \         </monitoring>\n\n        </item> \n        \n      </instancesSet>\n
+      \   </item>\n  </reservationSet>\n</DescribeInstancesResponse>\n"
+    http_version: '1.1'
