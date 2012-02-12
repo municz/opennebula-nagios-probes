@@ -1,0 +1,102 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605@localhost:4567/network
+    body: !!null 
+    headers:
+      accept:
+      - application/xml
+      connection:
+      - keep-alive
+      keep-alive:
+      - 30
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 13:51:06 GMT
+      content-type:
+      - text/html;charset=utf-8
+      connection:
+      - keep-alive
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '174'
+    body: ! '<NETWORK_COLLECTION><NETWORK href="localhost/network/4" name="public"/><NETWORK
+      href="localhost/network/6" name="monitoring"/></NETWORK_COLLECTION>       '
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605@localhost:4567/compute
+    body: !!null 
+    headers:
+      accept:
+      - application/xml
+      connection:
+      - keep-alive
+      keep-alive:
+      - 30
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 13:51:23 GMT
+      content-type:
+      - text/html;charset=utf-8
+      connection:
+      - keep-alive
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '112'
+    body: ! '<COMPUTE_COLLECTION><COMPUTE href="localhost/compute/145" name="one-145"/></COMPUTE_COLLECTION>       '
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605@localhost:4567/storage
+    body: !!null 
+    headers:
+      accept:
+      - application/xml
+      connection:
+      - keep-alive
+      keep-alive:
+      - 30
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 13:51:40 GMT
+      content-type:
+      - text/html;charset=utf-8
+      connection:
+      - keep-alive
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '174'
+    body: ! '<STORAGE_COLLECTION><STORAGE href="localhost/storage/16" name="suse"/><STORAGE
+      href="localhost/storage/26" name="monitoring"/></STORAGE_COLLECTION>       '
+    http_version: '1.1'

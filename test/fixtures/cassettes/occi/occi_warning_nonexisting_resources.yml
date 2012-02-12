@@ -1,0 +1,34 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://oneadmin:34c629abfcb47856b3d1c0a30798221aefb61605@localhost:4567/network/15
+    body: !!null 
+    headers:
+      accept:
+      - application/xml
+      connection:
+      - keep-alive
+      keep-alive:
+      - 30
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 404
+      message: Not Found
+    headers:
+      server:
+      - nginx/1.0.5
+      date:
+      - Sun, 12 Feb 2012 13:55:04 GMT
+      content-type:
+      - text/html;charset=utf-8
+      connection:
+      - keep-alive
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '56'
+    body: ! '[VirtualNetworkInfo] Error getting virtual network [15].'
+    http_version: '1.1'
