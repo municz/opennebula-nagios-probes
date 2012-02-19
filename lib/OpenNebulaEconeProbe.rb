@@ -12,6 +12,9 @@
 ## limitations under the License.
 ###########################################################################
 
+require 'nagios-probe'
+require 'AWS'
+
 #
 class OpenNebulaEconeProbe < Nagios::Probe
 

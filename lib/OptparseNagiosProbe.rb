@@ -12,6 +12,9 @@
 ## limitations under the License.
 ###########################################################################
 
+require 'optparse'
+require 'ostruct'
+
 class OptparseNagiosProbe
 
   VERSION = 0.99

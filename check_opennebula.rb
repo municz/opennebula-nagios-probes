@@ -14,39 +14,29 @@
 ## limitations under the License.
 ###########################################################################
 
-#
+# include the probe files and a custom version of OCA
 $: << File.expand_path("..", __FILE__) + '/lib'
-$: << File.expand_path("..", __FILE__) + '/lib/oca'
 
-#
+# bundler integration and dependencies
 require 'rubygems'
 require 'bundler/setup'
 
-#
 require 'nagios-probe'
-require 'AWS'
-require 'occi'
 require 'log4r'
-require 'optparse'
-require 'ostruct'
-
-require 'OpenNebula'
-
-#
-include OpenNebula
 include Log4r
 
-#
+# include the probe classes and a custom argument parser
 require 'OpenNebulaOnedProbe'
 require 'OpenNebulaOcciProbe'
 require 'OpenNebulaEconeProbe'
 require 'OptparseNagiosProbe'
 
-#
 begin
 
+  # parse the arguments (type checks, required args etc.)
   options = OptparseNagiosProbe.parse(ARGV)
 
+  # instantiate a probe
   case options.service
     when :oned
       probe = OpenNebulaOnedProbe.new(options)
@@ -61,10 +51,12 @@ begin
       raise Exception.new("This probe cannot check the specified service")
   end
 
+  # set the logger
   logger.outputters = Outputter.stderr
   logger.level = ERROR unless options.debug
   probe.logger = logger
 
+  # run the probe
   probe.run
 
 rescue Exception => e
@@ -74,6 +66,6 @@ rescue Exception => e
 
 end
 
-#
+# report the result in a nagios-compatible format
 puts probe.message
 exit probe.retval

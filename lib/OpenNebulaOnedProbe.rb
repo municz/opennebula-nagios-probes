@@ -12,6 +12,14 @@
 ## limitations under the License.
 ###########################################################################
 
+$: << File.expand_path("..", __FILE__) + '/oca'
+
+require 'nagios-probe'
+require 'OpenNebula'
+
+# include OCA
+include OpenNebula
+
 #
 class OpenNebulaOnedProbe < Nagios::Probe
 
